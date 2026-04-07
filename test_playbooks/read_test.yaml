@@ -15,6 +15,5 @@
 - name: List installed Ansible collections
   ansible.builtin.command: ansible-galaxy collection List
   register: galaxy_out
-
-- debug:
+  debug:
     var: galaxy_out.stdout_lines
