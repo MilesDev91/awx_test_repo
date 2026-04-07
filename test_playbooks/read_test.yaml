@@ -11,3 +11,10 @@
     - name: Display output
       debug:
         var: output.stdout_lines
+
+- name: List installed Ansible collections
+  ansible.builtin.command: ansible-galaxy collection List
+  register: galaxy_out
+
+- debug:
+    var: galaxy_out.stdout_lines
