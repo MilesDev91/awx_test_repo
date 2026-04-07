@@ -1,4 +1,9 @@
 ---
+- name: List installed Ansible collections
+  ansible.builtin.command: ansible-galaxy collection List
+  register: galaxy_out
+  debug:
+    var: galaxy_out.stdout_lines
 - name: Run read-only command on switch
   hosts: all
   gather_facts: no
@@ -12,8 +17,3 @@
       debug:
         var: output.stdout_lines
 
-- name: List installed Ansible collections
-  ansible.builtin.command: ansible-galaxy collection List
-  register: galaxy_out
-  debug:
-    var: galaxy_out.stdout_lines
