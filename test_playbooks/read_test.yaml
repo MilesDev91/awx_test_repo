@@ -1,9 +1,16 @@
 ---
-- name: List installed Ansible collections
-  ansible.builtin.command: ansible-galaxy collection List
-  register: galaxy_out
-  debug:
-    var: galaxy_out.stdout_lines
+- name: Inspect Execution Environment
+  hosts: localhost
+  gather_facts: false
+  tasks:
+    - name: List installed Ansible collections
+      ansible.builtin.command: ansible-galaxy collection list
+      register: galaxy_out
+
+    - name: Show installed collections
+      debug:
+        var: galaxy_out.stdout_lines
+
 - name: Run read-only command on switch
   hosts: all
   gather_facts: no
