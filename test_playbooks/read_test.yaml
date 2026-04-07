@@ -3,10 +3,12 @@
   hosts: localhost
   gather_facts: false
   tasks:
-    - name: List installed Ansible collections
-      ansible.builtin.command: ansible-galaxy collection list
-      register: galaxy_out
+    - debug:
+        msg: "testing"
+    #- name: List installed Ansible collections
+    #  ansible.builtin.command: ansible-galaxy collection list
+    #  register: galaxy_out
 
-    - name: Show installed collections
-      debug:
-        var: galaxy_out.stdout_lines
+    #- name: Show installed collections
+    #  debug:
+    #    var: galaxy_out.stdout_lines
