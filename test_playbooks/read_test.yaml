@@ -5,7 +5,7 @@
   connection: ansible.netcommon.network_cli
   tasks:
     - name: Run show version
-      cisco.ios.ios_commands:
+      cisco.ios.ios_command:
         commands:
           - show version
       register: show_ver
