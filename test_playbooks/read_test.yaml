@@ -1,17 +1,11 @@
 ---
 - name: Read-only 834
-  hosts: all
+  hosts: localhost
   gather_facts: false
-  connection: ansible.netcommon.network_cli
   tasks:
-    - name: Run show version
-      cisco.ios.ios_command:
-        commands:
-          - show version
-      register: show_ver
-        
-    - name: Print version summary
-      ansible.builtin.debug:
-        msg:
-          - "Host: {{ inventory_hostname }}"
-          - "{{ show_ver.stdout[0] }}"
+    - name: List collections in this EE
+      ansible.builtin.command: ansible-galaxy collection list
+      register: out
+
+    - debug:
+        var: out.stdout_lines
