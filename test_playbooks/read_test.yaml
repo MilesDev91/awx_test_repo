@@ -1,14 +1,17 @@
 ---
-- name: Inspect Execution Environment
-  hosts: localhost
+- name: Read-only 834
+  hosts: all
   gather_facts: false
+  connection: ansible.netcommon.network_cli
   tasks:
-    - debug:
-        msg: "testing"
-    - name: List installed Ansible collections
-      ansible.builtin.command: ansible-galaxy collection list
-      register: galaxy_out
-
-    - name: Show installed collections
-      debug:
-        var: galaxy_out.stdout_lines
+    - name: Run show version
+      cisco.ios.ios_commands:
+        commands:
+          - show version
+      register: show_ver
+        
+    - name: Print version summary
+      ansible.builtin.debug:
+        msg:
+          - "Host: {{ inventory_hostname }}"
+          - "{{ show_ver.stdout[0] }}"
